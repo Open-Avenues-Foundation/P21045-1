@@ -64,27 +64,32 @@ const sendText = async (request, response) => {
 
   const records = models.ContactText.findAll({
     where: {contactId: id, textMessageId: id}},
-
-    records.forEach(async (record) => {
+    //records is an array with contact ID and texMessage ID
+    //forEach is looping through the records array  
+    records.forEach(async(record) => {
     const {contactId, textMessageId, sentDate} = record
     
+    const contact = await models.Contacts.findByPk(id)
     const textMessage = await models.TextMessages.findByPk(id)
-    const contact = await models.ContactText.findByPk(id)
-
+  
+    console.log(sentMessage)
     const sentMessage = await client.messages
     .create({
       body: textMessage.message,
       from: '+17126256545',
       to: contact.phoneNumber
+     
     })
     //Update the record ContactsText
     await models.ContactText.update(
       {sentDate: Date.now()},
       {where: { contactId: id, textMessageId: id} } )
-    })
-    return sentMessage
-  }
-}
+   
+    console.log(record)
+   })//end of loop
+}) 
+
+
 
 module.export= {
   getAllTexts,

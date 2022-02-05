@@ -3,7 +3,8 @@ CREATE DATABASE privyData;
 CREATE USER 'privy'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Pr1vy$2';
 GRANT ALL ON privyClients.* TO 'privy'@'localhost';
 
-USE privyClients;
+USE privyData;
+SELECT * FROM customerPurchases;
 
 CREATE TABLE customers(
 id INT auto_increment,
@@ -14,19 +15,30 @@ email VARCHAR (255) NOT NULL,
 createdAt DATETIME DEFAULT NOW(),
 updatedAt DATETIME DEFAULT NOW(),
 deletedAt DATETIME,
-purchase VARCHAR,
 PRIMARY KEY (id)
 );
 
+CREATE TABLE purchases (
+id INT auto_increment,
+lastOrderPrice DECIMAL (10,2) NOT NULL,
+lastOrderDate DATE (9999-12-31) NOT NULL,
+city VARCHAR (255),
+stateAbr VARCHAR (2),
+createdAt DATETIME DEFAULT NOW(),
+updatedAt DATETIME DEFAULT NOW(),
+deletedAt DATETIME,
+PRIMARY KEY (id)
+);
 
-
-CREATE TABLE textMessages(
-customerId(id),
-sentMessage VARCHAR (255),
-errorResponse ENUM (sent, error),
-PRIMARY KEY (customerId),
+CREATE TABLE customerPurchases(
+customerId INT,
+purchaseId INT,
+createdAt DATETIME DEFAULT NOW(),
+updatedAt DATETIME DEFAULT NOW(),
+deletedAt DATETIME,
+PRIMARY KEY (customerId, purchaseId),
 FOREIGN KEY(customerId) REFERENCES customers(id),
-
+FOREIGN KEY(purchaseId) REFERENCES purchases(id)
 ); 
 
 
