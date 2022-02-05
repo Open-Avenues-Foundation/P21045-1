@@ -8,8 +8,6 @@ const Contacts = (connection, Sequelize) => connection.define('contacts', {
   state: { type: Sequelize.STRING },
   lastOrder: { type: Sequelize.DECIMAL },
   lastOrderDate: { type: Sequelize.DATE },
-
-
 }, { paranoid: true })
 
 

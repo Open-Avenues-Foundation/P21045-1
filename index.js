@@ -10,7 +10,7 @@ const textRoutes = require('./routes/textRoutes')
 const contactRoutes = require('./routes/contactRoutes')
 
 
-// refactor contactRoutes
+// call routes
 
 
 app.all('*', (request, response) => {
