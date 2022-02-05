@@ -1,8 +1,13 @@
-const { now } = require('lodash')
 const models = require('../models')
-const Contacts = require('../models/contacts')
-const client = require('./send_sms')
-const TextMessages = require('../models/textMessages')
+const allConfigs = require('../configs/sequelize')
+const environment = process.env.NODE_ENV || 'twilio'
+const config = allConfigs[environment]
+
+const accountSid = config.accountSid
+const authToken = config.authToken
+
+const client = require('twilio')(accountSid, authToken)
+
 
 const getAllTexts = async (request, response) => {
   try {
@@ -18,13 +23,13 @@ const getSpecificTexts = async (request, response) => {
   try {
     const { id } = request.params
 
-    const message = await models.TextMessages.findByPK(id)
+    const message = await models.TextMessages.findByPk(id)
 
     return message
-      ? response.send(400)
-      : response.sendStateu(400)
+      ? response.send(message)
+      : response.sendStatus(400)
   } catch (error) {
-    return response.status(400).send(error)
+    return response.status(500).send(error)
   }
 }
 
@@ -46,52 +51,42 @@ const saveText = async (request, response) => {
     return response.status(500).send('Cannont save message')
   }
 }
+
 const deleteText = async (request, response) => {
-
-    const deleteText = await models.TextMessages.findByPK(id)
-    //.destroy
-
-   //return response.status(201)
-
+    const deleteText = await models.TextMessages.findByPk(id)
+  return deleteText
+   ? response.send(deleteText)
+   : response.send(400).send('Text was not deleted')
 }
 
-const sendText = async (request, response ) => {
+const sendText = async (request, response) => {
+  const {id} = request.params //text message id
 
-const {id} = request. params
+  const records = models.ContactText.findAll({
+    where: {contactId: id, textMessageId: id}},
 
-//find all the text messages in the linking table with the id 
-const records = await models.ContactTexts.findAll({
-    where: //contact id, text message id, sendDate: null
-})
-//iterate over each contact and message id 
-        //for loop to:
-            //find cuomster with the id 
-            //find test messsage with id from request.params
-            //Goal: send text message from twilio 
-    records.forEach((record) => {
-        //const {contact id, text message id, sendDate: null} = record
-        const contact = models.Contacts.findByPK(Contacts.id)
-       
-        //getting the message from TextMessages Model
-        const textMessage = models.TextMessages.findByPK(textMessage.id)
+    records.forEach(async (record) => {
+    const {contactId, textMessageId, sentDate} = record
+    
+    const textMessage = await models.TextMessages.findByPk(id)
+    const contact = await models.ContactText.findByPk(id)
 
-        // need twilio to send the text message 
-       const sentMessage = await client.messages 
-            .create({
-                body: TextMessages.message, //text message  living in textMessage
-                from: '+17126256545',
-                to: Contacts.phoneNumber  //the phone number living in contacts
-            })
-           //updatae the record ContactsText wit hthe new sentData
-           await models.ContactTexts.update({
-               sentDate: DATE.now()},
-               { where: {
-                   contactsId: id,
-                   textMessagedId: id}
-                 })
-})
+    const sentMessage = await client.messages
+    .create({
+      body: textMessage.message,
+      from: '+17126256545',
+      to: contact.phoneNumber
+    })
+    //Update the record ContactsText
+    await models.ContactText.update(
+      {sentDate: Date.now()},
+      {where: { contactId: id, textMessageId: id} } )
+    })
+    return sentMessage
+  }
 }
-module.exports = {
+
+module.export= {
   getAllTexts,
   getSpecificTexts,
   saveText,
