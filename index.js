@@ -1,17 +1,16 @@
 /* eslint-disable no-console */
 const express = require('express')
-
 const app = express()
-
-// import text message routes
-const textRoutes = require('./routes/textRoutes')
-
-// import contact routes
 const contactRoutes = require('./routes/contactRoutes')
+const contactTextRoutes = require('./routes/contactTextRoutes')
+const textMessageRoutes = require('./routes/textMessageRoutes')
 
 
-// call routes
+app.use(express.json())
 
+app.use('/api/contact', contactRoutes)
+app.use('/api/campaign', contactTextRoutes)
+app.use('/api/text', textMessageRoutes)
 
 app.all('*', (request, response) => {
   response.sendStatus(404)

@@ -1,9 +1,10 @@
 const Sequelize = require('sequelize')
-const Messages = require('./textMessages')
 const ContactsModel = require('./contacts')
-const ContactTextModel = require('./contactText')
-const allConfigs = require('../configs/sequelize')
+// check line below
+const ContactTextModel = require('./contactTexts')
+const TextMessagesModel= require('./textMessages')
 
+const allConfigs = require('../configs/sequelize')
 const environment = process.env.NODE_ENV || 'development'
 const config = allConfigs[environment]
 
@@ -11,16 +12,18 @@ const connection = new Sequelize(config.database, config.username, config.passwo
   host: config.host, dialect: config.dialect,
 })
 
-const TextMessages = Messages(connection, Sequelize)
 const Contacts = ContactsModel(connection, Sequelize)
 const ContactText = ContactTextModel(connection, Sequelize, TextMessages, Contacts)
+const TextMessages = TextMessagesModel(connection, Sequelize)
+
 
 Contacts.belongsToMany(TextMessages, { through: ContactText })
+// contactTexts here
 TextMessages.belongsToMany(Contacts, { through: ContactText })
 
 module.exports = {
-  TextMessages,
   Contacts,
   ContactText,
+  TextMessages,
   Op: Sequelize.Op
 }
