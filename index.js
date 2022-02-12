@@ -4,8 +4,9 @@ const app = express()
 const contactRoutes = require('./routes/contactRoutes')
 const contactTextRoutes = require('./routes/contactTextRoutes')
 const textMessageRoutes = require('./routes/textMessageRoutes')
+const cors = require('cors')
 
-
+app.use(cors())
 app.use(express.json())
 
 app.use('/api/contact', contactRoutes)
