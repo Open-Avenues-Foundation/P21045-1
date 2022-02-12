@@ -60,19 +60,18 @@ const deleteText = async (request, response) => {
 }
 
 const sendText = async (request, response) => {
-  const {id} = request.params //text message id
+  const {id} = request.params
 
   const records = models.ContactText.findAll({
     where: {contactId: id, textMessageId: id}},
-    //records is an array with contact ID and texMessage ID
-    //forEach is looping through the records array  
+    
     records.forEach(async(record) => {
     const {contactId, textMessageId, sentDate} = record
     
     const contact = await models.Contacts.findByPk(id)
     const textMessage = await models.TextMessages.findByPk(id)
   
-    console.log(sentMessage)
+    console.log(sentMessage)//send twilio message here? 
     const sentMessage = await client.messages
     .create({
       body: textMessage.message,
@@ -80,16 +79,14 @@ const sendText = async (request, response) => {
       to: contact.phoneNumber
      
     })
-    //Update the record ContactsText
+
     await models.ContactText.update(
       {sentDate: Date.now()},
       {where: { contactId: id, textMessageId: id} } )
    
     console.log(record)
-   })//end of loop
+   })
 }) 
-
-
 
 module.export= {
   getAllTexts,

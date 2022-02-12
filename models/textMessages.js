@@ -5,3 +5,5 @@ const TextMessages = (connection, Sequelize) => connection.define('message', {
 }, { paranoid: true })
 
 module.exports = TextMessages
+
+

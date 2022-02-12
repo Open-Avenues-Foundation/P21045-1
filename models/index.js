@@ -24,3 +24,4 @@ module.exports = {
   ContactText,
   Op: Sequelize.Op
 }
+

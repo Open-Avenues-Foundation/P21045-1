@@ -7,3 +7,5 @@ const ContactText = (connection, Sequelize, TextMessages, Contacts) => {
 }
 
 module.export = ContactText
+
+

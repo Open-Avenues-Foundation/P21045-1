@@ -13,3 +13,6 @@ const Contacts = (connection, Sequelize) => connection.define('contacts', {
 
 module.exports = Contacts
 
+
+
+
