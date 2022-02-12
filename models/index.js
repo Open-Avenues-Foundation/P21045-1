@@ -2,7 +2,7 @@ const Sequelize = require('sequelize')
 const ContactsModel = require('./contacts')
 // check line below
 const ContactTextModel = require('./contactTexts')
-const TextMessagesModel= require('./textMessages')
+const TextMessagesModel = require('./textMessages')
 
 const allConfigs = require('../configs/sequelize')
 const environment = process.env.NODE_ENV || 'development'
@@ -13,8 +13,8 @@ const connection = new Sequelize(config.database, config.username, config.passwo
 })
 
 const Contacts = ContactsModel(connection, Sequelize)
-const ContactText = ContactTextModel(connection, Sequelize, TextMessages, Contacts)
 const TextMessages = TextMessagesModel(connection, Sequelize)
+const ContactText = ContactTextModel(connection, Sequelize, TextMessages, Contacts)
 
 
 Contacts.belongsToMany(TextMessages, { through: ContactText })
