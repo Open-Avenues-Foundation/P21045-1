@@ -1,4 +1,4 @@
-const ContactText = (connection, Sequelize, TextMessages, Contacts) => {
+const ContactTexts = (connection, Sequelize, TextMessages, Contacts) => {
   return connection.define('contactTexts', {
     contactId: { type: Sequelize.INTEGER, primayKey: true, reference: { model: Contacts, key: 'id' } },
     textMessageId: { type: Sequelize.INTEGER, primayKey: true, reference: { model: TextMessages, key: 'id' } },
@@ -6,4 +6,4 @@ const ContactText = (connection, Sequelize, TextMessages, Contacts) => {
   }, { paranoid: true })
 }
 
-module.export = ContactText
+module.exports = ContactTexts
