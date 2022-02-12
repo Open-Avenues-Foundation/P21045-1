@@ -1,15 +1,18 @@
 const express = require('express')
-const app = express()
-const { getAllTexts,
-    getSpecificTexts,
-    saveText,
-    deleteText,
-    sendText } = require('../controllers/textMessages')
+const {
+  getAllTexts,
+  getSpecificTexts,
+  saveText,
+  deleteText,
+  sendText
+} = require('../controllers/textMessages')
 
-app.get('/', getAllTexts)
-app.get('/:id', getSpecificTexts)
-app.post('/', saveText)
-app.delete('/:id', deleteText)
-app.get('/:id', sendText)
+const router = express.Router()
 
-modules.export = app
+router.get('/', getAllTexts)
+router.get('/:id', getSpecificTexts)
+router.post('/', saveText)
+router.delete('/:id', deleteText)
+router.get('/:id', sendText)
+
+module.exports = router

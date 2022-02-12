@@ -1,26 +1,27 @@
-const models = require('../models')
 const Contacts = require('../models/contacts')
-const ContactsTexts = require('../modesls/contactTexts')
-const ContactsTextMessages = require('.../models/textMessages')
+const ContactsTexts = require('../models/contactTexts')
+const ContactsTextMessages = require('../models/textMessages')
 
-const getAllContactTexts = async(req, res) => {
+const getAllContactTexts = async (req, res) => {
   try {
-    const texts = await ContactsTexts.findAll() 
-    return res.status(200).send(text) 
-  } catch(error) {
+    const texts = await ContactsTexts.findAll()
+
+    return res.status(200).send(texts)
+  } catch (error) {
     return res.status(401).send(error)
   }
 }
 
-const getSpecificContactText = async(req, res) => {
+const getSpecificContactText = async (req, res) => {
   const { id } = req.params
-  const text = await ConctactsTextMessages.findByPK(id) 
+  const text = await ContactsTextMessages.findByPK(id)
+
   return res.status(200).send(text)
 }
 
-const saveContactText = async (request, response) => {
-  
-  
+const saveContactText = async (req, res) => {
+
+
 }
 
 const deleteContactText = async (request, response) => {
@@ -43,31 +44,30 @@ const deleteContactText = async (request, response) => {
 
 // TBD where it is going to live
 const sendContactText = async (req, res) => {
-  const { id } = req.params 
+  const { id } = req.params
   const records = ContactsTexts.findAll({ where: { text_message_id: id } })
-  records.forEach(async(record) => {
+
+  records.forEach(async (record) => {
     const { contact_id, text_message_id, sent_date } = record
-    const contact = await Contacts.findByPk(contact_id) 
-    const textMessage = await TextMessage.findByPk(text_message_id) 
+    const contact = await Contacts.findByPk(contact_id)
+    const textMessage = await TextMessage.findByPk(text_message_id)
     const sentMessage = await client.messages
       .create({
-          body: textMessage.message,
-          from: '+17126256545',
-          to: contact.phoneNumber
-        })
+        body: textMessage.message,
+        from: '+17126256545',
+        to: contact.phoneNumber
+      })
 
-     // UPDATE the record ContactsText with the new sent date.
-      await ContactsTexts.update(
-        { sent_date: Date.now() },
-        { where: { contact_id: contact.id, text_message_id: textMessage.id } }
-       )
-    }) 
+    // UPDATE the record ContactsText with the new sent date.
+    await ContactsTexts.update({ sent_date: Date.now() },
+      { where: { contact_id: contact.id, text_message_id: textMessage.id } })
+  })
 }
 
 module.exports = {
-getAllContactTexts,
-getSpecificContactText,
-saveContactText,
-deleteContactText,
-sendContactText
+  getAllContactTexts,
+  getSpecificContactText,
+  saveContactText,
+  deleteContactText,
+  sendContactText
 }
