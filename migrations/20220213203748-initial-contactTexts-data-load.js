@@ -1,0 +1,220 @@
+'use strict'
+
+module.exports = {
+  async up(queryInterface, Sequelize) {
+    /**
+     * Add altering commands here.
+     *
+     * Example:
+     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     */
+    await queryInterface.bulkInsert('contactTexts', [{
+      contactId: 1,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 2,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 3,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 4,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 5,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 6,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 7,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 8,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 9,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 10,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 11,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 12,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 13,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 14,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 15,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 16,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 17,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 18,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 19,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 20,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 21,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 22,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 23,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 24,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 25,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 26,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 27,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 28,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 29,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 30,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 31,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 32,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 33,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 34,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 35,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 36,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 37,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 38,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 39,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 40,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 41,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 42,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 43,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 44,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 45,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 46,
+      textMessageId: 2,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 47,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 48,
+      textMessageId: 1,
+      sentDate: Sequelize.getDate
+    }, {
+      contactId: 49,
+      textMessageId: 3,
+      sentDate: Sequelize.getDate
+    }
+    ])
+  },
+
+  async down(queryInterface,) {
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
+    await queryInterface.bulkDelete('contactTexts')
+  }
+}
