@@ -5,7 +5,8 @@ const environment = process.env.NODE_ENV || 'twilio'
 const config = allConfigs[environment]
 const accountSid = config.accountSid
 const authToken = config.authToken
-const client = require('twilio')(accountSid, authToken)
+const client = require('twilio')(TW_SID='AC74f21682dab7647cff268dfb86184c94',
+TW_TOK='e79a6b11f1f2fd76d9a3c55b5fa58d42')
 
 
 const getAllTexts = async (request, response) => {

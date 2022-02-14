@@ -9,7 +9,7 @@
     "lint": "./node_modules/.bin/eslint --format codeframe .",
     "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe .",
     "dev:client": "cd client && npm start",
-  "dev:client:build": "cd client && npm run build",
+    "dev:client:build": "cd client && npm run build",
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\""
   },
   "repository": {
