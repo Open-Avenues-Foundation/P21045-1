@@ -14,7 +14,7 @@ const getAllContactTexts = async (req, res) => {
 
 const getSpecificContactText = async (req, res) => {
   const { id } = req.params
-  const text = await ContactsTextMessages.findByPK(id)
+  const text = await ContactsTextMessages.findByPk(id)
 
   return res.status(200).send(text)
 }
