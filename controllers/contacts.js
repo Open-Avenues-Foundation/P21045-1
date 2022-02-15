@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const models = require('../models')
 
+// tested Feb 14 -  working
 const getAllContacts = async (request, response) => {
   try {
     const contacts = await models.Contacts.findAll()
@@ -10,6 +11,7 @@ const getAllContacts = async (request, response) => {
     return response.status(400).send(error)
   }
 }
+// tested Feb 14 - working
 const getSpecificContacts = async (request, response) => {
   try {
     const { id } = request.params
@@ -23,7 +25,7 @@ const getSpecificContacts = async (request, response) => {
     return response.status(500).send(error)
   }
 }
-
+// tested Feb 14 - working
 const saveContact = async (request, response) => {
   try {
     const {
