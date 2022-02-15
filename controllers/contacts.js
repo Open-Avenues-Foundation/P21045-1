@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 const models = require('../models')
 
+// tested Feb 14 -  working
 const getAllContacts = async (request, response) => {
   try {
     const contacts = await models.Contacts.findAll()
@@ -10,6 +11,7 @@ const getAllContacts = async (request, response) => {
     return response.status(400).send(error)
   }
 }
+// tested Feb 14 - working
 const getSpecificContacts = async (request, response) => {
   try {
     const { id } = request.params
@@ -23,21 +25,21 @@ const getSpecificContacts = async (request, response) => {
     return response.status(500).send(error)
   }
 }
-
+// tested Feb 14 - working
 const saveContact = async (request, response) => {
   try {
     const {
-      email, firstName, lastName, phoneNUmber, city, state, lastOrder, lastOrderDate
+      firstName, lastName, phoneNumber, email, city, homeState //removing lastOrder and lastOrderDate for testing
     } =
   request.body
-
-    if (!email || !firstName || !lastName || !phoneNUmber || !city || !state || !lastOrder || !lastOrderDate) {
+console.log(firstName, lastName, phoneNumber, email, city, homeState )
+    if ( !firstName || !lastName || !phoneNumber || !email || !city || !homeState) {
       return response
         .status(400)
         .send('Contact was not created')
     }
     const newContact = await models.Contacts.create({
-      email, firstName, lastName, phoneNUmber, city, state, lastOrder, lastOrderDate
+      firstName, lastName, phoneNumber, email, city, homeState
     })
 
     return response.status(201).send(newContact)
