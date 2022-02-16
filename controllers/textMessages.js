@@ -52,7 +52,7 @@ const saveText = async (request, response) => {
     return response.status(500).send('Cannont save message')
   }
 }
-
+/* not a prioity 
 const deleteText = async (request, response) => {
   const deleteText = await models.TextMessages.findByPk(id)
 
@@ -86,11 +86,10 @@ const sendText = async (request, response) => {
     console.log(record)
   })
 }
+*/
 
 module.exports = {
   getAllTexts,
   getSpecificTexts,
-  saveText,
-  deleteText,
-  sendText
+  saveText
 }
