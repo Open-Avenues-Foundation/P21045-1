@@ -1,7 +1,6 @@
 /* eslint-disable max-len */
 const models = require('../models')
 
-// tested Feb 14 -  working
 const getAllContacts = async (request, response) => {
   try {
     const contacts = await models.Contacts.findAll()
@@ -11,7 +10,7 @@ const getAllContacts = async (request, response) => {
     return response.status(400).send(error)
   }
 }
-// tested Feb 14 - working
+
 const getSpecificContacts = async (request, response) => {
   try {
     const { id } = request.params
@@ -25,7 +24,7 @@ const getSpecificContacts = async (request, response) => {
     return response.status(500).send(error)
   }
 }
-// tested Feb 14 - working
+
 const saveContact = async (request, response) => {
   try {
     const {
@@ -47,7 +46,7 @@ console.log(firstName, lastName, phoneNumber, email, city, homeState )
     return response.status(500).send('Cannont save contact')
   }
 }
-
+/* - not priorities right now
 const deleteContact = async (request, response) => {
   const { id } = request.params
 
@@ -59,13 +58,10 @@ const deleteContact = async (request, response) => {
 }
 
 const updateContact = async (request, response) => {
-// needs to be done
 }
-
+*/
 module.exports = {
   getAllContacts,
   getSpecificContacts,
-  saveContact,
-  deleteContact,
-  updateContact
+  saveContact
 }
