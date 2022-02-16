@@ -26,7 +26,7 @@ PRIMARY KEY (id)
 CREATE TABLE textMessages (
 id INT auto_increment,
 textMessage VARCHAR (255),
-messageStatus ENUM ('draft', 'failed', 'sent'),
+messageStatus ENUM('draft', 'failed', 'sent'),
 createdAt DATETIME DEFAULT NOW(),
 updatedAt DATETIME DEFAULT NOW(),
 deletedAt DATETIME,
