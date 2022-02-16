@@ -37,11 +37,13 @@ const getSpecificTexts = async (request, response) => {
 const saveText = async (request, response) => {
   try {
     const { message } = request.body
+    // const newMessage = await models.TextMessages.create({ message })
+
 
     if (!message) {
       return response
         .status(400)
-        .send('Message was not created')
+        .send('Message was not created  -HELP URSULA?')
     }
     const newMessage = await models.TextMessages.create({ message })
 
