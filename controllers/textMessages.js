@@ -5,8 +5,9 @@ const environment = process.env.NODE_ENV || 'twilio'
 const config = allConfigs[environment]
 const accountSid = config.accountSid
 const authToken = config.authToken
-const client = require('twilio')(TW_SID='AC74f21682dab7647cff268dfb86184c94',
-TW_TOK='e79a6b11f1f2fd76d9a3c55b5fa58d42')
+const client = require('twilio')
+// (TW_SID = 'AC74f21682dab7647cff268dfb86184c94',
+// TW_TOK = 'e79a6b11f1f2fd76d9a3c55b5fa58d42')
 
 
 const getAllTexts = async (request, response) => {
@@ -36,16 +37,15 @@ const getSpecificTexts = async (request, response) => {
 
 const saveText = async (request, response) => {
   try {
-    const { message } = request.body
-    // const newMessage = await models.TextMessages.create({ message })
+    const { textMessage } = request.body
+    // const newMessage = await models.TextMessages.create({ textMessage })
 
-
-    if (!message) {
+    if (!textMessage) {
       return response
         .status(400)
         .send('Message was not created  -HELP URSULA?')
     }
-    const newMessage = await models.TextMessages.create({ message })
+    const newMessage = await models.TextMessages.create({ textMessage })
 
     return response.status(201).send(newMessage)
   }
