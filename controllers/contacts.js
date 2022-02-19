@@ -46,7 +46,8 @@ console.log(firstName, lastName, phoneNumber, email, city, homeState )
     return response.status(500).send('Cannont save contact')
   }
 }
-/* - not priorities right now
+
+/*
 const deleteContact = async (request, response) => {
   const { id } = request.params
 
@@ -57,8 +58,8 @@ const deleteContact = async (request, response) => {
     : response.status(400).send('Contact. was not deleted')
 }
 
-const updateContact = async (request, response) => {
-}
+//const updateContact = async (request, response) => {
+//}
 */
 module.exports = {
   getAllContacts,

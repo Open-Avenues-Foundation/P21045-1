@@ -13,7 +13,7 @@ const router = express.Router()
 
 router.get('/', getAllContactTexts)
 router.get('/:id', getSpecificContactText)
-router.post('/', saveContactText)
+// router.post('/', saveContactText)
 //router.delete('/:id', deleteContactText)
 //router.patch('/:id', sendContactText)
 

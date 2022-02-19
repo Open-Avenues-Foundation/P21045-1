@@ -1,10 +1,11 @@
-const Contacts = require('../models/contacts')
-const ContactsTexts = require('../models/contactTexts')
-const ContactsTextMessages = require('../models/textMessages')
+const models = require('../models')
+// const Contacts = require('../models/contacts')
+// const ContactsTexts = require('../models/contactTexts')
+// const TextMessages = require('../models/textMessages')
 
 const getAllContactTexts = async (req, res) => {
   try {
-    const texts = await ContactsTexts.findAll()
+    const texts = await contactTexts.findAll()
 
     return res.status(200).send(texts)
   } catch (error) {
@@ -14,13 +15,12 @@ const getAllContactTexts = async (req, res) => {
 
 const getSpecificContactText = async (req, res) => {
   const { id } = req.params
-  const text = await ContactsTextMessages.findByPk(id)
+  const text = await contactTexts.findByPk(id)
 
   return res.status(200).send(text)
 }
-
+/*
 const saveContactText = async (req, res) => {
-
 
 }
 
@@ -28,9 +28,9 @@ const deleteContactText = async (request, response) => {
   try {
     const { id } = request.params
 
-    const contactsText = await ContactsTexts.findOne({ where: { id } })
+    const contactTexts = await contactTexts.findOne({ where: { id } })
 
-    if (!contactsText) return response.status(400).send(`Unable to find the text with id: ${id} to delete`)
+    if (!contactTexts) return response.status(400).send(`Unable to find the text with id: ${id} to delete`)
     await campaign.destroy()
 
     return response.status(200).send('Text has been successfully deleted')
@@ -45,7 +45,7 @@ const deleteContactText = async (request, response) => {
 // TBD where it is going to live
 const sendContactText = async (req, res) => {
   const { id } = req.params
-  const records = ContactsTexts.findAll({ where: { text_message_id: id } })
+  const records = contactTexts.findAll({ where: { text_message_id: id } })
 
   records.forEach(async (record) => {
     const { contact_id, text_message_id, sent_date } = record
@@ -59,15 +59,15 @@ const sendContactText = async (req, res) => {
       })
 
     // UPDATE the record ContactsText with the new sent date.
-    await ContactsTexts.update({ sent_date: Date.now() },
+    await contactTexts.update({ sent_date: Date.now() },
       { where: { contact_id: contact.id, text_message_id: textMessage.id } })
   })
 }
-
+*/
 module.exports = {
   getAllContactTexts,
-  getSpecificContactText,
-  saveContactText,
-  deleteContactText,
-  sendContactText
+  getSpecificContactText
+  // saveContactText,
+  // deleteContactText,
+ //  sendContactText
 }

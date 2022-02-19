@@ -38,8 +38,7 @@ const getSpecificTexts = async (request, response) => {
 const saveText = async (request, response) => {
   try {
     const { textMessage } = request.body
-    // const newMessage = await models.TextMessages.create({ textMessage })
-
+   
     if (!textMessage) {
       return response
         .status(400)

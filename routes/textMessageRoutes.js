@@ -4,7 +4,7 @@ const {
   getSpecificTexts,
   saveText
  // deleteText,
-  //sendText
+// sendText
 } = require('../controllers/textMessages')
 
 const router = express.Router()

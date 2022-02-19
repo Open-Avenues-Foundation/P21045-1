@@ -10,7 +10,7 @@ app.use(cors())
 app.use(express.json())
 
 app.use('/api/contact', contactRoutes)
-app.use('/api/campaign', contactTextRoutes)
+app.use('/api/contactText', contactTextRoutes)
 app.use('/api/text', textMessageRoutes)
 
 app.all('*', (request, response) => {

@@ -1,7 +1,6 @@
 const Sequelize = require('sequelize')
 const ContactsModel = require('./contacts')
-// check line below
-const ContactTextModel = require('./contactTexts')
+const ContactTextsModel = require('./contactTexts')
 const TextMessagesModel = require('./textMessages')
 
 const allConfigs = require('../configs/sequelize')
@@ -14,16 +13,15 @@ const connection = new Sequelize(config.database, config.username, config.passwo
 
 const Contacts = ContactsModel(connection, Sequelize)
 const TextMessages = TextMessagesModel(connection, Sequelize)
-const ContactText = ContactTextModel(connection, Sequelize, TextMessages, Contacts)
+const ContactTexts = ContactTextsModel(connection, Sequelize, TextMessages, Contacts)
 
 
-Contacts.belongsToMany(TextMessages, { through: ContactText })
-// contactTexts here
-TextMessages.belongsToMany(Contacts, { through: ContactText })
+Contacts.belongsToMany(TextMessages, { through: ContactTexts })
+TextMessages.belongsToMany(Contacts, { through: ContactTexts })
 
 module.exports = {
   Contacts,
-  ContactText,
+  ContactTexts,
   TextMessages,
   Op: Sequelize.Op
 }
