@@ -13,15 +13,20 @@ const connection = new Sequelize(config.database, config.username, config.passwo
 
 const Contacts = ContactsModel(connection, Sequelize)
 const TextMessages = TextMessagesModel(connection, Sequelize)
-const ContactTexts = ContactTextsModel(connection, Sequelize, TextMessages, Contacts)
+const ContactsTexts = ContactTextsModel(connection, Sequelize, TextMessages, Contacts)
 
 
-Contacts.belongsToMany(TextMessages, { through: ContactTexts })
-TextMessages.belongsToMany(Contacts, { through: ContactTexts })
+Contacts.belongsToMany(TextMessages, { through: ContactsTexts })
+TextMessages.belongsToMany(Contacts, { through: ContactsTexts })
+Contacts.hasMany(ContactsTexts)
+ContactsTexts.belongsTo(Contacts)
+TextMessages.hasMany(ContactsTexts)
+ContactsTexts.belongsTo(TextMessages)
+
 
 module.exports = {
   Contacts,
-  ContactTexts,
+  ContactsTexts,
   TextMessages,
   Op: Sequelize.Op
 }

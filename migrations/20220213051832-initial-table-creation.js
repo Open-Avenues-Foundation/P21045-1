@@ -32,9 +32,10 @@ module.exports = {
       deletedAt: { type: Sequelize.DATE, },
     })
     await queryInterface.createTable('contactTexts', {
-      contactId: { type: Sequelize.INTEGER, primayKey: true, reference: { model: 'contacts', key: 'id' } },
-      textMessageId: { type: Sequelize.INTEGER, primayKey: true, reference: { model: 'textMessages', key: 'id' } },
-      sentDate: { type: Sequelize.DATE, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), },
+      id: { type: Sequelize.INTEGER, autoIncrement: true, primaryKey: true },
+      contactId: { type: Sequelize.INTEGER, reference: { model: 'contacts', key: 'id' } },
+      textMessageId: { type: Sequelize.INTEGER, reference: { model: 'textMessages', key: 'id' } },
+      sentDate: { type: Sequelize.DATE, defaultValue: null, allowNull: true },
       createdAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'), },
       updatedAt: { type: Sequelize.DATE, allowNull: false, defaultValue: Sequelize.literal('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'), },
       deletedAt: { type: Sequelize.DATE, },
