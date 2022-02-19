@@ -28,11 +28,11 @@ const getSpecificContacts = async (request, response) => {
 const saveContact = async (request, response) => {
   try {
     const {
-      firstName, lastName, phoneNumber, email, city, homeState //removing lastOrder and lastOrderDate for testing
+      firstName, lastName, phoneNumber, email, city, homeState // removing lastOrder and lastOrderDate for testing
     } =
   request.body
-console.log(firstName, lastName, phoneNumber, email, city, homeState )
-    if ( !firstName || !lastName || !phoneNumber || !email || !city || !homeState) {
+
+    if (!firstName || !lastName || !phoneNumber || !email || !city || !homeState) {
       return response
         .status(400)
         .send('Contact was not created')

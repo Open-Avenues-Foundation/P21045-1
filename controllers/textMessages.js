@@ -1,27 +1,27 @@
 /* eslint-disable no-console */
 const models = require('../models')
-const allConfigs = require('../configs/sequelize')
-const environment = process.env.NODE_ENV || 'twilio'
-const config = allConfigs[environment]
-const accountSid = config.accountSid
-const authToken = config.authToken
-const client = require('twilio')
-// (TW_SID = 'AC74f21682dab7647cff268dfb86184c94',
-// TW_TOK = 'e79a6b11f1f2fd76d9a3c55b5fa58d42')
-
+const configs = require('../configs/sequelize')
+const { accountSid, authToken } = configs.development
+const client = require('twilio')(accountSid, authToken)
 
 const getAllTexts = async (request, response) => {
   try {
-    const text = await models.TextMessages.findAll()
+    const text = await models.TextMessages.findAll({
+      include: [
+        { model: models.ContactsTexts, as: 'contactTexts' }
+      ]
+    })
 
     return response.status(200).send(text)
   }
   catch (error) {
+    console.log(error)
+
     return response.status(400).send(error)
   }
 }
 
-const getSpecificTexts = async (request, response) => {
+const getSpecificText = async (request, response) => {
   try {
     const { id } = request.params
     const message = await models.TextMessages.findByPk(id)
@@ -35,10 +35,10 @@ const getSpecificTexts = async (request, response) => {
   }
 }
 
-const saveText = async (request, response) => {
+const createText = async (request, response) => {
   try {
     const { textMessage } = request.body
-   
+
     if (!textMessage) {
       return response
         .status(400)
@@ -53,44 +53,49 @@ const saveText = async (request, response) => {
     return response.status(500).send('Cannont save message')
   }
 }
-/* not a prioity 
-const deleteText = async (request, response) => {
-  const deleteText = await models.TextMessages.findByPk(id)
 
-  return deleteText
-    ? response.send(deleteText)
-    : response.send(400).send('Text was not deleted')
-}
+// const deleteText = async (request, response) => {
+//   const deleteText = await models.TextMessages.findByPk(id)
 
-const sendText = async (request, response) => {
-  const { id } = request.params
-  const records = models.ContactText.findAll({
-    where: { contactId: id, textMessageId: id }
-  })
+//   return deleteText
+//     ? response.send(deleteText)
+//     : response.send(400).send('Text was not deleted')
+// }
+
+// TBD where it is going to live
+const sendText = async (req, res) => {
+  const { id } = req.params
+  const records = await models.ContactsTexts.findAll({ where: { textMessageId: id } })
+
+  console.log(records)
 
   records.forEach(async (record) => {
-    const { contactId, textMessageId, sentDate } = record
-    const contact = await models.Contacts.findByPk(id)
-    const textMessage = await models.TextMessages.findByPk(id)
+    const { contactId, textMessageId } = record
+    const contact = await models.Contacts.findByPk(contactId)
+    const textMessage = await models.TextMessages.findByPk(textMessageId)
 
-    console.log(sentMessage)
-    const sentMessage = await client.messages
+    await client.messages
       .create({
-        body: textMessage.message,
-        from: '+17126256545',
+        body: textMessage.textMessage,
+        // from: '+17126256545',
+        from: '+19036626875',
         to: contact.phoneNumber
       })
 
-    await models.ContactText.update({ sentDate: Date.now() },
-      { where: { contactId: id, textMessageId: id } })
-
-    console.log(record)
+    // UPDATE the record ContactsText with the new sent date.
+    await models.ContactsTexts.update({ sentDate: Date.now() }, { where: { id: record.id } })
   })
+
+  // Update the text message status
+  await models.TextMessages.update({ messageStatus: 'sent' },
+    { where: { id } })
+
+  res.status(200).send('Messages sent!')
 }
-*/
 
 module.exports = {
   getAllTexts,
-  getSpecificTexts,
-  saveText
+  getSpecificText,
+  createText,
+  sendText
 }
