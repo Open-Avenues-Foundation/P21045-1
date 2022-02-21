@@ -1,28 +1,31 @@
 import React, {useEffect, useState} from 'react'
-import Axios from 'axios'
-import Header from './Header'
+import ResponsiveAppBar from './ResponsiveAppBar'
+import Footer from './Footer'
+import BasicGrid from './BasicGrid'
+import CustomizedInputs from './CustomizedInputs'
+import DataTable from './DataTable'
 import TextMessagesTable from './TextMessagesTable'
 
 const TextMessages = () => {
-
-    const [textMessages, setTextMessages] = useState([])
+/*
+    //const [TextMessages, setTextMessages] = useState([])
     const [filteredTextMessages, setFilteredTextMessages] = useState([])
     useEffect(() => {
         const fetchTextMessages = async () => {
-            const fetchedTextMessages = await Axios.get('http://localhost:1378/api/text/')
+            const fetchedContact = await Axios.get('http://localhost:1378/api/contact/')
        
-            console.log(fetchedTextMessages)
-            setTextMessages(fetchedTextMessages.data)
-            setFilteredTextMessages(fetchedTextMessages.data)
+            console.log(fetchedContact)
+            setTextMessages(fetchedContact.data)
+            setFilteredTextMessages(fetchedContact.data)
         }
         
         fetchTextMessages()
     }, [])
+    */
     return (
         <div>
-      < Header />
-      <TextMessagesTable filteredTextMessages={filteredTextMessages} setFilteredTextMessages={setFilteredTextMessages} />
-    {/* <Footer /> */}
+      <ResponsiveAppBar />
+      <BasicGrid />
  </div>
     )
 }

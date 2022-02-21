@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import Axios from 'axios'
-import Header from './Header'
+import ResponsiveAppBar from './ResponsiveAppBar'
+import Footer from './Footer'
+import BasicGrid from './BasicGrid'
+import CustomizedInputs from './CustomizedInputs'
+import DataTable from './DataTable'
 import ContactsTable from './ContactsTable'
 
 const Contacts = () => {
-
-    const [contacts, setContacts] = useState([])
+/*
+    //const [contacts, setContacts] = useState([])
     const [filteredContacts, setFilteredContacts] = useState([])
     useEffect(() => {
         const fetchContacts = async () => {
@@ -18,11 +21,11 @@ const Contacts = () => {
         
         fetchContacts()
     }, [])
+    */
     return (
         <div>
-      < Header />
-      <ContactsTable filteredContacts={filteredContacts} setFilteredContacts={setFilteredContacts} />
-    {/* <Footer /> */}
+      <ResponsiveAppBar />
+      <BasicGrid />
  </div>
     )
 }
