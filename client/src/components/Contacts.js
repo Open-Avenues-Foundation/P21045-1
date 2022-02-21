@@ -1,10 +1,8 @@
-import React, {useEffect, useState} from 'react'
-import ResponsiveAppBar from './ResponsiveAppBar'
-import Footer from './Footer'
-import BasicGrid from './BasicGrid'
-import CustomizedInputs from './CustomizedInputs'
-import DataTable from './DataTable'
-import ContactsTable from './ContactsTable'
+import React, {useEffect, useState} from 'react';
+// import ResponsiveAppBar from './ResponsiveAppBar'
+import BasicGrid from './BasicGrid';
+import DataTable from './DataTable';
+
 
 const Contacts = () => {
 /*
@@ -24,8 +22,8 @@ const Contacts = () => {
     */
     return (
         <div>
-      <ResponsiveAppBar />
       <BasicGrid />
+      <DataTable />
  </div>
     )
 }

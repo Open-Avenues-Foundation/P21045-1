@@ -10,7 +10,9 @@ const Header = () => {
 
 return(
     <div> 
-      <h1> Placeholder Header   </h1>
+      <h1> 
+        Placeholder Header - add privy logo 
+      </h1>
       <NavLink to="/about">About</NavLink>
       <NavLink to="/contacts">Contacts</NavLink>
       <NavLink to="/textMessages">Text Messages</NavLink>
