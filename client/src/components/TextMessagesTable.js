@@ -1,4 +1,6 @@
 import React from 'react'
+import BasicGrid from './BasicGrid'
+import DataTable from './DataTable'
 
 const TextMeassagesTable = (props) => {
 const { filteredTextMessages, setFilteredTextMessages } = props
@@ -16,6 +18,8 @@ const { filteredTextMessages, setFilteredTextMessages } = props
 return(
     <div>
         Text Messages Table Here
+        <BasicGrid />
+        <DataTable />
     </div>
 )
 }

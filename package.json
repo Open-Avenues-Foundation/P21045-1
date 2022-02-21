@@ -9,7 +9,7 @@
     "lint": "./node_modules/.bin/eslint --format codeframe .",
     "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe .",
     "dev:client": "cd client && npm start",
-  "dev:client:build": "cd client && npm run build",
+    "dev:client:build": "cd client && npm run build",
     "dev": "concurrently \"npm:dev:server\" \"npm:dev:client\""
   },
   "repository": {
@@ -31,6 +31,7 @@
     "nodemon": "^2.0.15"
   },
   "dependencies": {
+    "@mui/x-data-grid": "^5.5.1",
     "cors": "^2.8.5",
     "csv-parse": "^5.0.4",
     "express": "^4.17.2",
