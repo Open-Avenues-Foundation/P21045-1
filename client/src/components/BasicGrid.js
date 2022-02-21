@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
 import Footer from './Footer'
-import DataTable from './DataTable';
+import Header from './Header'
+import DataTable from './DataTable'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -18,6 +19,9 @@ export default function BasicGrid() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
+      <Grid item xs={12}>
+          <Item><Header /></Item>
+        </Grid>
         <Grid item xs={12}>
           <Item>Contacts Table Title Bar</Item>
         </Grid>
@@ -31,7 +35,7 @@ export default function BasicGrid() {
           <Item>Search Box Selector</Item>
         </Grid>
         <Grid item xs={12}>
-          <Item>Contacts Table Here</Item>
+          <Item><DataTable /></Item>
         </Grid>
         <Grid item xs={12}>
           <Item><Footer/></Item>
