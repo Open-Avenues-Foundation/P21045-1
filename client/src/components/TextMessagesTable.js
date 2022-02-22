@@ -1,27 +1,38 @@
-import React from 'react'
-import BasicGrid from './BasicGrid'
-import DataTable from './DataTable'
+import React, {useState, useEffect} from 'react';
+import { DataGrid } from '@mui/x-data-grid'; 
+import { Button } from '@mui/material';
+import axios from 'axios';
 
-const TextMeassagesTable = (props) => {
-const { filteredTextMessages, setFilteredTextMessages } = props
-// todo: make state that holds value of input box \ search term
+const sendText = async (textMessage) => {
+    const textSent = await axios.post(`http://localhost:1378/api/text/${textMessage.id}`)
 
-// todo: useEffect() that updates the filtered text message to only contain the text messages
-// that include our search term
+    console.log(textSent)
+}
 
-// todo: Make a componenet that allows you to create text messages
+const TextMessagesTable = (props) => {
+const { filteredTextMessages } = props 
 
-// todo: Make a search box that changes the state made on line 5 
+const columns = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'textMessage', headerName: 'Message Text', width: 300 },
+    { field: 'messageStatus', headerName: 'Status', width: 125 },
+    { field: 'updatedAt', headerName: 'Date Sent', width: 175 },
+    { field: 'contactsTexts', headerName: '# of Contacts', width: 175, valueGetter: (params) => {return params.row.contactTexts.length} },
+    { field: 'startButton', headerName: 'Send Text', width: 175, renderCell: (textMessage) => {
+        return <Button onClick={() => sendText(textMessage)}>Send</Button>
+    }}
 
-// todo: make a table that displays these text message
+]
 
 return(
-    <div>
-        Text Messages Table Here
-        <BasicGrid />
-        <DataTable />
-    </div>
+    <DataGrid
+        rows={filteredTextMessages}
+        columns={columns}
+        pageSize={10}
+        disableSelectionOnClick
+        autoHeight {...filteredTextMessages}
+      />
 )
 }
 
-export default  TextMeassagesTable 
+export default TextMessagesTable 

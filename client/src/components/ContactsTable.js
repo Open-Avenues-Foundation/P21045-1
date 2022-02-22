@@ -1,37 +1,30 @@
 import React, {useState, useEffect} from 'react';
-import BasicGrid from './BasicGrid'
-import DataTable from './DataTable';
+import { DataGrid } from '@mui/x-data-grid'; 
 
 
 const ContactsTable = (props) => {
-const { filteredContacts, setFilteredContacts, selectedContacts } = props 
-const [inputBox, setInputBox] = useState('')
-const [dropDownSelector, setDropDownSlector] = useState('')
-/*
-// todo: make state that holds value of input box
+const { filteredContacts } = props 
 
-const setSelectedContacts = ()=>{
-// this is the function that updates the piece of state selectedContacts
-// it will set the value of the selectedContacts piece of state equal
-//to the contents of the input box = ?? is this correct?
-}
+const columns = [
+    { field: 'id', headerName: 'ID', width: 100 },
+    { field: 'firstName', headerName: 'First Name', width: 175 },
+    { field: 'lastName', headerName: 'Last Name', width: 175 },
+    { field: 'phoneNumber', headerName: 'Phone number', width: 175 },
+    { field: 'email', headerName: 'Email', width: 175 },
+    { field: 'city', headerName: 'City', width: 175 },
+    { field: 'homeState', headerName: 'State', width: 100 },
+    { field: 'lastOrder', headerName: 'Last Order Price', width: 175 },
+    { field: 'lastOrderDate', headerName: 'Last Order Date', width: 175 },
+]
 
-useEffect(() => {
-// this will change the 
-})
-
-// todo: useEffect() that updates the filtered contacts to only contain the contatcs
-// that include our search term
-// todo: Make a componenet that allows you to create contact
-// todo: Make a search box that changes the state made on line 5 
-// todo: make a table that displays these contacts
-
-*/
 return(
-    <div>
-        <DataTable />
-    </div>
-       
+    <DataGrid
+        rows={filteredContacts}
+        columns={columns}
+        pageSize={10}
+        disableSelectionOnClick
+        autoHeight {...filteredContacts}
+      />
 )
 }
 
