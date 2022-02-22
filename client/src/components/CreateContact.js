@@ -1,6 +1,12 @@
 import { Grid, Button, FormControl, TextField , Alert} from "@mui/material";
 import React, { useState } from "react";
 import axios from 'axios'
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 const Error = () => {
   return (
@@ -54,6 +60,17 @@ const CreateContact = () => {
   }
 
   return (
+    <div> 
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Create New Contact</Typography>
+        </AccordionSummary>
+   
+        <AccordionDetails>
     <Grid className="createContactForm" container spacing={2}>
         {validationError && <Error/>}
         {contactCreated && <Success createdContact={createdContact} />}
@@ -133,6 +150,10 @@ const CreateContact = () => {
           <Button onClick={createContact}>Create Contact</Button>
         </Grid>
     </Grid>
+
+    </AccordionDetails>
+    </Accordion>
+    </div>
   );
 };
 
