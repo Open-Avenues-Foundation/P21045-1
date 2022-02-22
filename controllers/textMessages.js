@@ -77,8 +77,7 @@ const sendText = async (req, res) => {
     await client.messages
       .create({
         body: textMessage.textMessage,
-        // from: '+17126256545',
-        from: '+19036626875',
+        from: '+17126256545',
         to: contact.phoneNumber
       })
 
