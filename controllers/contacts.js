@@ -28,7 +28,7 @@ const getSpecificContacts = async (request, response) => {
 const saveContact = async (request, response) => {
   try {
     const {
-      firstName, lastName, phoneNumber, email, city, homeState // removing lastOrder and lastOrderDate for testing
+      firstName, lastName, phoneNumber, email, city, homeState, lastOrder, lastOrderDate
     } =
   request.body
 
@@ -38,7 +38,7 @@ const saveContact = async (request, response) => {
         .send('Contact was not created')
     }
     const newContact = await models.Contacts.create({
-      firstName, lastName, phoneNumber, email, city, homeState
+      firstName, lastName, phoneNumber, email, city, homeState, lastOrder, lastOrderDate
     })
 
     return response.status(201).send(newContact)

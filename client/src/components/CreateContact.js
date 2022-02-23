@@ -62,7 +62,7 @@ const CreateContact = (props) => {
     }
     const postedContact = await axios.post(
       "http://localhost:1378/api/contact",
-      newContact
+      {...newContact, LastOderDate: new Date(newContact.lastOrderDate)}
     );
     setCreatedContact(postedContact.data);
     setContactCreated(true);
@@ -211,7 +211,7 @@ const CreateContact = (props) => {
                   onChange={(event) =>
                     setNewContact({
                       ...newContact,
-                      lastOrder: event.target.value,
+                      lastOrder: Number(event.target.value),
                     })
                   }
                   fullWidth
