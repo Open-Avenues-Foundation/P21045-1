@@ -14,24 +14,7 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-const Error = () => {
-  return (
-    <Grid item xs={12}>
-      <Alert severity="error">Please input all values before submitting!</Alert>
-    </Grid>
-  );
-};
-
-const Success = (props) => {
-  const { createdContact } = props;
-  return (
-    <Grid item xs={12}>
-      <Alert severity="success">Contact ID:{createdContact.id} created! </Alert>
-    </Grid>
-  );
-};
-
-const CreateContact = () => {
+const CreateContact = (props) => {
   const defaultContactState = {
     firstName: "",
     lastName: "",
@@ -43,9 +26,10 @@ const CreateContact = () => {
     lastOrderDate: "",
   };
 
+  const {setContactCreated, contactCreated} = props
+
   const [newContact, setNewContact] = useState(defaultContactState);
   const [validationError, setValidationError] = useState(false);
-  const [contactCreated, setContactCreated] = useState(false);
   const [createdContact, setCreatedContact] = useState({});
 
   const createContact = async (event) => {
@@ -85,8 +69,32 @@ const CreateContact = () => {
     console.log(postedContact.data);
   };
 
+  const Error = () => {
+    return (
+      <Grid item xs={12} onClick={resetForm}>
+        <Alert severity="error">Please input all values before submitting!</Alert>
+      </Grid>
+    );
+  };
+  
+  const Success = (props) => {
+    const { createdContact } = props;
+    return (
+      <Grid item xs={12} onClick={resetForm}>
+        <Alert severity="success">Contact ID:{createdContact.id} created! </Alert>
+      </Grid>
+    );
+  };
+
+  const resetForm = () => {
+    setContactCreated(false)
+    setValidationError(false)
+    setCreatedContact({})
+    setNewContact(defaultContactState)
+  }
+
   return (
-    <Grid item xs={10} sx={{ py: 2 }}>
+    <Grid item  sx={{ py: 2 }}>
       <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
@@ -100,19 +108,18 @@ const CreateContact = () => {
           <Grid
             className="createContactForm"
             container
-            fullWidth
+            spacing={2}
             direction="row"
             justifyContent="center"
             alignItems="center"
-            
+            xs={{ pt: 5 }}
           >
             {validationError && <Error />}
             {contactCreated && <Success createdContact={createdContact} />}
-
-            <Grid item xs={3}>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <TextField
                   id="firstName"
+                  InputLabelProps={{ shrink: true }}
                   value={newContact.firstName}
                   onChange={(event) =>
                     setNewContact({
@@ -120,12 +127,14 @@ const CreateContact = () => {
                       firstName: event.target.value,
                     })
                   }
+                  fullWidth
                   label={"First Name"}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <TextField
                   id="lastName"
+                  InputLabelProps={{ shrink: true }}
                   value={newContact.lastName}
                   onChange={(event) =>
                     setNewContact({
@@ -133,15 +142,15 @@ const CreateContact = () => {
                       lastName: event.target.value,
                     })
                   }
+                  fullWidth
                   label={"Last Name"}
                 />
               </Grid>
-            </Grid>
 
-            <Grid item xs={3}>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <TextField
                   id="phoneNumber"
+                  InputLabelProps={{ shrink: true }}
                   value={newContact.phoneNumber}
                   onChange={(event) =>
                     setNewContact({
@@ -149,33 +158,38 @@ const CreateContact = () => {
                       phoneNumber: event.target.value,
                     })
                   }
+                  fullWidth
                   label={"Phone Number"}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <TextField
                   id="email"
+                  InputLabelProps={{ shrink: true }}
                   value={newContact.email}
                   onChange={(event) =>
                     setNewContact({ ...newContact, email: event.target.value })
                   }
+                  fullWidth
                   label={"Email"}
                 />
               </Grid>
-            </Grid>
-            <Grid item xs={3}>
-              <Grid item xs={6}>
+
+              <Grid item xs={3}>
                 <TextField
                   id="city"
+                  InputLabelProps={{ shrink: true }}
                   value={newContact.city}
                   onChange={(event) =>
                     setNewContact({ ...newContact, city: event.target.value })
                   }
+                  fullWidth
                   label={"City"}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <TextField
+                InputLabelProps={{ shrink: true }}
                   id="homeState"
                   value={newContact.homeState}
                   onChange={(event) =>
@@ -184,13 +198,14 @@ const CreateContact = () => {
                       homeState: event.target.value,
                     })
                   }
+                  fullWidth
                   label={"State"}
                 />
               </Grid>
-            </Grid>
-            <Grid item xs={3}>
-              <Grid item xs={6}>
+
+              <Grid item xs={3}>
                 <TextField
+                InputLabelProps={{ shrink: true }}
                   id="lastOrder"
                   value={newContact.lastOrder}
                   onChange={(event) =>
@@ -199,11 +214,13 @@ const CreateContact = () => {
                       lastOrder: event.target.value,
                     })
                   }
+                  fullWidth
                   label={"Last Order Price"}
                 />
               </Grid>
-              <Grid item xs={6}>
+              <Grid item xs={3}>
                 <TextField
+                InputLabelProps={{ shrink: true }}
                   id="lastOrderDate"
                   value={newContact.lastOrderDate}
                   onChange={(event) =>
@@ -212,13 +229,14 @@ const CreateContact = () => {
                       lastOrderDate: event.target.value,
                     })
                   }
+                  fullWidth
                   label={"Last Order Date"}
                 />
               </Grid>
-            </Grid>
-            <Grid xs={3} item>
-              <Button onClick={createContact}>Create Contact</Button>
-            </Grid>
+
+       
+              <Button sx={{my:2}} onClick={createContact}>Create Contact</Button>
+
           </Grid>
         </AccordionDetails>
       </Accordion>

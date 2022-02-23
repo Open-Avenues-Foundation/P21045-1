@@ -14,9 +14,9 @@ const { filteredTextMessages } = props
 
 const columns = [
     { field: 'id', headerName: 'ID', width: 100 },
-    { field: 'textMessage', headerName: 'Message Text', width: 300 },
+    { field: 'textMessage', headerName: 'Message Text', width: 350 },
+    { field: 'updatedAt', headerName: 'Date Sent', width: 200 },
     { field: 'messageStatus', headerName: 'Status', width: 125 },
-    { field: 'updatedAt', headerName: 'Date Sent', width: 175 },
     { field: 'contactsTexts', headerName: '# of Contacts', width: 175, valueGetter: (params) => {return params.row.contactTexts.length} },
     { field: 'startButton', headerName: 'Send Text', width: 175, renderCell: (textMessage) => {
         return <Button onClick={() => sendText(textMessage)}>Send</Button>

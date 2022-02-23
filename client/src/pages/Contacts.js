@@ -13,6 +13,7 @@ const Contacts = () => {
   const [filteredContacts, setFilteredContacts] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [filterBy, setFilterBy] = useState("id");
+  const [contactCreated, setContactCreated] = useState(false);
 
   useEffect(() => {
     const fetchContacts = async () => {
@@ -25,7 +26,7 @@ const Contacts = () => {
     };
 
     fetchContacts();
-  }, []);
+  }, [contactCreated]);
 
   useEffect(() => {
     if (filterBy === "lastOrder") {
@@ -75,7 +76,7 @@ const Contacts = () => {
       <Grid className="searchArea" container spacing={2} sx={{py: 2}} >
         <SearchSelector
           menuItems={selectorMenuItems}
-          name="Filter by"
+          name="Filter By:"
           value={filterBy}
           onChange={handleChangeFilterBy}
         />
@@ -90,7 +91,7 @@ const Contacts = () => {
           <ContactsTable filteredContacts={filteredContacts} />
         </Grid>
       </Grid>
-      <CreateContact />
+      <CreateContact contactCreated={contactCreated} setContactCreated={setContactCreated}/>
     </Grid>
   );
 };

@@ -9,6 +9,7 @@ export default function SearchSelector(props) {
       <FormControl fullWidth>
         <InputLabel id="SearchSelectorLabel">{name}</InputLabel>
         <Select
+        InputLabelProps={{ shrink: true }}
           labelId="SearchSelectorLabel"
           id="SearchSelector"
           value={value}

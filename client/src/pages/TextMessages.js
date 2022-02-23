@@ -14,6 +14,7 @@ const TextMessages = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filterBy, setFilterBy] = useState("id");
   const [isLoading, setIsLoading] = useState(true);
+  const [messageCreated, setMessageCreated] = useState(false);
 
   useEffect(() => {
     const fetchTextMessages = async () => {
@@ -27,7 +28,7 @@ const TextMessages = () => {
     };
 
     fetchTextMessages();
-  }, []);
+  }, [messageCreated]);
 
   useEffect(() => {
     if (filterBy === "contactCount") {
@@ -67,31 +68,41 @@ const TextMessages = () => {
 
   return (
     // Holds our entire textMessages page
-    <Grid className="textMessagesPage" container sx={{ px: 4 }} 
-      direction="row"
-      justifyContent="center"
-      alignItems="center">
-      <Header />
-      <Grid className="searchArea" container spacing={2} sx={{ py: 2 }} >
-        <SearchSelector
-          menuItems={selectorMenuItems}
-          name="Filter by"
-          value={filterBy}
-          onChange={handleChangeFilterBy}
-        />
-        <SearchBox
-          value={searchTerm}
-          onChange={handleChangeSearchBox}
-          name="Search TextMessages"
-        />
-      </Grid>
-      <Grid className="textMessagesTable" container>
-        <Grid item xs={12}>
-          <TextMessagesTable filteredTextMessages={filteredTextMessages} />
+    <>
+      <Grid
+        className="textMessagesPage"
+        container
+        sx={{ px: 4 }}
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+        justifyItems="center"
+      >
+        <Header />
+        <Grid className="searchArea" container spacing={2} sx={{ py: 2 }}>
+          <SearchSelector
+            menuItems={selectorMenuItems}
+            name="Filter by"
+            value={filterBy}
+            onChange={handleChangeFilterBy}
+          />
+          <SearchBox
+            value={searchTerm}
+            onChange={handleChangeSearchBox}
+            name="Search Text Messages:"
+          />
         </Grid>
+        <Grid className="textMessagesTable" container>
+          <Grid item xs={12}>
+            <TextMessagesTable filteredTextMessages={filteredTextMessages} />
+          </Grid>
+        </Grid>
+        <CreateTextMessage setMessageCreated={setMessageCreated} messageCreated={messageCreated}/>
       </Grid>
-        <CreateTextMessage />
-    </Grid>
+
+       
+      
+    </>
   );
 };
 
