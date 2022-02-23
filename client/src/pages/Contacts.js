@@ -67,9 +67,12 @@ const Contacts = () => {
 
   return (
     // Holds our entire contacts page
-    <Grid className="contactsPage" container>
+    <Grid className="contactsPage" container sx={{px: 4}}
+      direction="row"
+      justifyContent="center"
+      alignItems="center">
       <Header />
-      <Grid className="searchArea" container sx={{ margin: 3 }}>
+      <Grid className="searchArea" container spacing={2} sx={{py: 2}} >
         <SearchSelector
           menuItems={selectorMenuItems}
           name="Filter by"
@@ -88,7 +91,6 @@ const Contacts = () => {
         </Grid>
       </Grid>
       <CreateContact />
-      <Footer />
     </Grid>
   );
 };

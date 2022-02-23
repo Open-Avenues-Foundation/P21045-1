@@ -5,8 +5,8 @@ export default function SearchSelector(props) {
   const { value, name, onChange, menuItems } = props;
 
   return (
-    <Grid item>
-      <FormControl>
+    <Grid item xs={1.75}>
+      <FormControl fullWidth>
         <InputLabel id="SearchSelectorLabel">{name}</InputLabel>
         <Select
           labelId="SearchSelectorLabel"
