@@ -49,7 +49,7 @@ export default function CreateTextMessage() {
 
 
     return (
-        <div>
+        <Grid item xs={10} sx={{py: 2}}>
             <Accordion>
                 <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -105,6 +105,6 @@ export default function CreateTextMessage() {
         </Grid>
             </AccordionDetails>
             </Accordion>
-        </div>
+        </Grid>
     );
 }

@@ -67,9 +67,12 @@ const TextMessages = () => {
 
   return (
     // Holds our entire textMessages page
-    <Grid className="textMessagesPage" container>
+    <Grid className="textMessagesPage" container sx={{ px: 4 }} 
+      direction="row"
+      justifyContent="center"
+      alignItems="center">
       <Header />
-      <Grid className="searchArea" container sx={{ margin: 3 }}>
+      <Grid className="searchArea" container spacing={2} sx={{ py: 2 }} >
         <SearchSelector
           menuItems={selectorMenuItems}
           name="Filter by"
@@ -83,15 +86,11 @@ const TextMessages = () => {
         />
       </Grid>
       <Grid className="textMessagesTable" container>
-        <Grid item xs={12} sx={{}}>
+        <Grid item xs={12}>
           <TextMessagesTable filteredTextMessages={filteredTextMessages} />
         </Grid>
       </Grid>
-        <Grid item xs={12}>
         <CreateTextMessage />
-        </Grid>
-
-      <Footer />
     </Grid>
   );
 };
